@@ -31,10 +31,22 @@ const GetRolesDetail = () => {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchModules(); 
     }, [page, limit]);  
 
+    const deleteRole =async (role_id) => 
+        {
+            try {
+                const response = await axios.delete('http://localhost:8085/delRoleById', {
+                    params: {
+                        role_id: role_id
+                    }
+                    
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
     return (
         <div className="allModulesDiv">
             <button 
@@ -62,7 +74,7 @@ const GetRolesDetail = () => {
                             <td>
                                 <i className="bi bi-eye"></i>
                                 <i className="bi bi-pencil"></i>
-                                <i className="bi bi-trash"></i>
+                                <i className="bi bi-trash" onClick={() => deleteRole(data.role_id)}></i>
                             </td>
                         </tr>
                     ))}

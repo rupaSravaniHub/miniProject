@@ -10,12 +10,17 @@ function App() {
   const [addModule, setaddmodule] = useState(false);
   const [rolesList, setrolesList] = useState(false);
   const [addRole, setaddRole] = useState(false);
-
+  const [updatemoduleId, setUpdateModuleId] = useState(null);
+  const [add,setaddModuleId] =useState('')
+  // const [viewModule, setviewModule] = useState(false);
   return (
     <div className="App">
 
       <Context.Provider value={
-        { modulesList, setmodulesList, addModule, setaddmodule, rolesList, setrolesList,addRole, setaddRole}}>
+        { modulesList, setmodulesList, addModule, setaddmodule, rolesList, setrolesList,addRole, setaddRole,updatemoduleId,
+          setUpdateModuleId,
+          // add,setaddModuleId,viewModule,setviewModule
+        }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main></Main>}></Route>

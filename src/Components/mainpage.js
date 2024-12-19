@@ -5,9 +5,10 @@ import GetRolesDetail from './getRoles'
 import { useContext } from "react";
 import { Context } from "../App";
 import AddRole from './addRole';
+import GetModule from './getModule';
 
 const Main = () => {
-    const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, setaddRole } = useContext(Context);
+    const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, setaddRole,viewModule,setviewModule} = useContext(Context);
 
     const getModules = () => {
         setmodulesList(true);
@@ -47,6 +48,7 @@ const Main = () => {
                         {addModule && <AddModule />}
                         {rolesList && <GetRolesDetail/>}
                         {addRole && <AddRole/>}
+                        {viewModule && <GetModule/>}
                     </div>
                     </div>
               

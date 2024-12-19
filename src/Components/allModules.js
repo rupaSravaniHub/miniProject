@@ -2,9 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import { Context } from "../App";
 import '../style/allModules.css';
 import axios from "axios";
+import UpdateModuleData from "./updateModule";
 
 const AllModules = () => {
-    const { modulesList, setmodulesList, addModule, setaddmodule } = useContext(Context);
+    const { modulesList, setmodulesList, addModule, setaddmodule,updatemoduleId,setUpdateModuleId } = useContext(Context);
 
     const addModuleHandle = () => {
         setaddmodule(true);
@@ -35,18 +36,19 @@ const AllModules = () => {
         fetchModules(); 
     }, [page, limit]);  
 
-    const updateModule =async (moduleId) => 
+
+    // const [add,setaddModuleId] =useContext(Context);
+    // const [viewModule,setviewModule] =useContext(Context);
+    const AddModule = (moduleId) => 
         {
-            try {
-                const response = await axios.put('http://localhost:8085/updateModulebyId', {
-                    params: {
-                        module_id: moduleId
-                    }
-                    
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+            // setaddModuleId(moduleId);
+            // setviewModule(true);
+        }
+    // const [setUpdateForm] = useContext(Context); 
+    const updateModule = (moduleId) => 
+        {
+            setUpdateModuleId(moduleId);
+            // setUpdateForm(true);
         }
     const deleteModule =async (moduleId) => 
     {
@@ -88,7 +90,7 @@ const AllModules = () => {
                             <td>{data.module_name}</td>
                             <td>{data.description}</td>
                             <td>
-                                <i className="bi bi-eye"> </i>
+                                <i className="bi bi-eye"  onClick={() => AddModule(data.module_id)}> </i>
                                 <i className="bi bi-pencil" onClick={() => updateModule(data.module_id)}> </i>
                                 <i className="bi bi-trash" onClick={() => deleteModule(data.module_id)}></i>
                                 </td>
