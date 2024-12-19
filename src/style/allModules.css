@@ -1,0 +1,119 @@
+.allModulesDiv {
+    display: flex;
+    flex-direction: column;
+    
+}
+.paginationButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+td i{
+    color:rgb(2, 105, 165);
+}
+.pages span{
+    font: bold;
+}
+.paginationButtons{
+    display: flex; 
+    gap: 5px;
+}
+.paginationButtons button{
+    border: 0.5px solid black;
+    background-color: white;
+}
+
+#bodyDiv {
+    font-size: 14px;
+   
+}
+
+.table th, .table td {
+    font-size: 14px;
+}
+
+.bi {
+    font-size: 16px; 
+}
+/* Base font size for small screens */
+body {
+    font-size: 1rem; /* 16px for base font size */
+}
+
+/* Medium screens (>=768px) */
+@media (min-width: 768px) {
+    body {
+        font-size: 1.125rem; /* 18px for medium screens */
+    }
+}
+
+/* Large screens (>=992px) */
+@media (min-width: 992px) {
+    body {
+        font-size: 1.25rem; /* 20px for large screens */
+    }
+}
+
+/* Extra large screens (>=1200px) */
+@media (min-width: 1200px) {
+    body {
+        font-size: 1.375rem; /* 22px for extra large screens */
+    }
+}
+/* For headers */
+h1 {
+    font-size: 1.5rem; /* Default for small screens */
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 1.75rem; /* Larger header for medium screens */
+    }
+}
+
+@media (min-width: 992px) {
+    h1 {
+        font-size: 2rem; /* Even larger for large screens */
+    }
+}
+
+/* For buttons */
+button {
+    font-size: 0.875rem; /* Default button size */
+}
+
+@media (min-width: 768px) {
+    button {
+        font-size: 1rem; /* Button size for medium screens */
+    }
+}
+
+@media (min-width: 992px) {
+    button {
+        font-size: 1.125rem; /* Larger button for large screens */
+    }
+}
+
+/* For table text */
+table {
+    font-size: 0.875rem; /* Smaller text for tables */
+}
+
+@media (min-width: 768px) {
+    table {
+        font-size: 1rem; /* Normal text for medium screens */
+    }
+}
+
+@media (min-width: 992px) {
+    table {
+        font-size: 1.125rem; /* Larger table text for large screens */
+    }
+}
+
+
+
+
+
+
+

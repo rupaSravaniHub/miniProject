@@ -3,12 +3,12 @@ import { Context } from "../App";
 import '../style/allModules.css';
 import axios from "axios";
 
-const AllModules = () => {
-    const { modulesList, setmodulesList, addModule, setaddmodule } = useContext(Context);
+const GetRolesDetail = () => {
+    const { rolesList, setrolesList,addRole, setaddRole } = useContext(Context);
 
-    const addModuleHandle = () => {
-        setaddmodule(true);
-        setmodulesList(false);
+    const addRoleHandle = () => {
+        setaddRole(true);
+        setrolesList(false);
     };
 
     const [page, setPage] = useState(1);
@@ -19,7 +19,7 @@ const AllModules = () => {
     useEffect(() => {
         const fetchModules = async () => {
             try {
-                const response = await axios.get('http://localhost:8085/getAllModules', {
+                const response = await axios.get('http://localhost:8085/getRoles', {
                     params: {
                         page: page,
                         limit: limit
@@ -35,38 +35,12 @@ const AllModules = () => {
         fetchModules(); 
     }, [page, limit]);  
 
-    const updateModule =async (moduleId) => 
-        {
-            try {
-                const response = await axios.put('http://localhost:8085/updateModulebyId', {
-                    params: {
-                        module_id: moduleId
-                    }
-                    
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-    const deleteModule =async (moduleId) => 
-    {
-        try {
-            const response = await axios.delete('http://localhost:8085/delById', {
-                params: {
-                    module_id: moduleId
-                }
-                
-            });
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
     return (
         <div className="allModulesDiv">
             <button 
                 style={{ backgroundColor: 'rgb(2, 105, 165)' }} 
                 className="btn mt-2 ms-auto"
-                onClick={addModuleHandle}
+                onClick={addRoleHandle}
             >
                 <i style={{ color: 'white' }} className="bi bi-plus"></i>
                 <span style={{ color: 'white' }}>Add</span>
@@ -76,22 +50,20 @@ const AllModules = () => {
                 <thead className="table-light">
                     <tr>
                         <th scope="col">S.NO</th>
-                        <th scope="col">ModuleName</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {output.map((data, index) => (
-                        <tr key={index}> 
-                            <th scope="row">{data.module_id}</th>
-                            <td>{data.module_name}</td>
-                            <td>{data.description}</td>
+                        <tr key={data.role_id}> 
+                            <th scope="row">{index + 1}</th>
+                            <td>{data.role_name}</td>
                             <td>
-                                <i className="bi bi-eye"> </i>
-                                <i className="bi bi-pencil" onClick={() => updateModule(data.module_id)}> </i>
-                                <i className="bi bi-trash" onClick={() => deleteModule(data.module_id)}></i>
-                                </td>
+                                <i className="bi bi-eye"></i>
+                                <i className="bi bi-pencil"></i>
+                                <i className="bi bi-trash"></i>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -174,4 +146,4 @@ const AllModules = () => {
     );
 };
 
-export default AllModules;
+export default GetRolesDetail;

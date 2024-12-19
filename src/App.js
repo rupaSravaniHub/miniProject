@@ -8,11 +8,14 @@ export const Context = React.createContext();
 function App() {
   const [modulesList, setmodulesList] = useState(true);
   const [addModule, setaddmodule] = useState(false);
+  const [rolesList, setrolesList] = useState(false);
+  const [addRole, setaddRole] = useState(false);
 
   return (
     <div className="App">
 
-      <Context.Provider value={{ modulesList, setmodulesList, addModule, setaddmodule }}>
+      <Context.Provider value={
+        { modulesList, setmodulesList, addModule, setaddmodule, rolesList, setrolesList,addRole, setaddRole}}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main></Main>}></Route>

@@ -1,18 +1,11 @@
 .container-fluid {
-    background-color:rgb(248, 249, 250);
+    /* background-color:rgb(248, 249, 250);*/
+     background-color: black;
 }
-
+/* menubar styling */
 #menuBar {
     background-color:rgb(2, 105, 165);
    height: 100vh;
-}
-
-#headerBar {
-    background-color: white;
-    height: 8vh;
-    display: flex;
-    gap: 30px;
-    align-items: center;
 }
 .menuItems {
     display: flex;
@@ -21,23 +14,71 @@
 .menuItems span{
     color: white;
 }
-#bodyDiv{
+#menuBar .menuItems span {
+    font-size: 1rem; 
+}
+
+@media (max-width: 992px) { 
+    #menuBar .menuItems span {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) { 
+    #menuBar .menuItems span {
+        font-size: 0.6rem;
+    }
+}
+
+/* header styling */
+#headerBar {
     background-color: white;
-    margin-left: 235px;
-    margin-top: -90vh;
-    width: 82%;
+    height: 8vh;
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
-td i{
-    color:rgb(2, 105, 165);
+#headerBar h3 {
+    font-size: 2rem; 
 }
-.pages span{
-    font: bold;
+
+#headerBar span {
+    font-size: 1rem; 
 }
-.paginationButtons{
-    display: flex; 
-    gap: 5px;
+
+@media (max-width: 992px) { 
+    #headerBar h3 {
+        font-size: 1.5rem;
+    }
+
+    #headerBar span {
+        font-size: 0.9rem;
+    }
 }
-.paginationButtons button{
-    border: 0.5px solid black;
+
+@media (max-width: 576px) {
+    #headerBar h3 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    #headerBar span {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+}
+
+
+#bodyDiv {
     background-color: white;
+    margin-left: 17.5%; 
+    margin-top: -43%; 
+    width: 82%; 
+    height: auto;
+    border-radius: 5px;
+}
+
+.part2{
+    display: flex;
+    flex-direction: column;
 }
