@@ -1,14 +1,15 @@
 import { useContext, useState, useEffect } from "react";
-import { Context } from "../App";
-import '../style/allModules.css';
+import { Context } from "../../App";
+import '../../style/allModules.css';
 import axios from "axios";
+import UpdateModuleData from "./updateModule";
 
-const GetRolesDetail = () => {
-    const { rolesList, setrolesList,addRole, setaddRole } = useContext(Context);
+const AllModules = () => {
+    const { modulesList, setmodulesList, addModule, setaddmodule,updatemoduleId,setUpdateModuleId } = useContext(Context);
 
-    const addRoleHandle = () => {
-        setaddRole(true);
-        setrolesList(false);
+    const addModuleHandle = () => {
+        setaddmodule(true);
+        setmodulesList(false);
     };
 
     const [page, setPage] = useState(1);
@@ -19,7 +20,7 @@ const GetRolesDetail = () => {
     useEffect(() => {
         const fetchModules = async () => {
             try {
-                const response = await axios.get('http://localhost:8085/getRoles', {
+                const response = await axios.get('http://localhost:8085/getAllModules', {
                     params: {
                         page: page,
                         limit: limit
@@ -31,28 +32,42 @@ const GetRolesDetail = () => {
                 console.error('Error fetching data:', error);
             }
         };
+
         fetchModules(); 
     }, [page, limit]);  
 
-    const deleteRole =async (role_id) => 
+
+    const {setaddModuleId} = useContext(Context); 
+    const {setviewModule} =useContext(Context);
+    const ViewModule = (moduleId) => 
         {
-            try {
-                const response = await axios.delete('http://localhost:8085/delRoleById', {
-                    params: {
-                        role_id: role_id
-                    }
-                    
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+            setaddModuleId(moduleId);
+            setviewModule(true);
         }
+    // const [setUpdateForm] = useContext(Context); 
+    const updateModule = (moduleId) => 
+        {
+            setUpdateModuleId(moduleId);
+            // setUpdateForm(true);
+        }
+    const deleteModule =async (moduleId) => 
+    {
+        try {
+            const response = await axios.delete('http://localhost:8085/delById', {
+                params: {
+                    module_id: moduleId
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
     return (
         <div className="allModulesDiv">
             <button 
                 style={{ backgroundColor: 'rgb(2, 105, 165)' }} 
                 className="btn mt-2 ms-auto"
-                onClick={addRoleHandle}
+                onClick={addModuleHandle}
             >
                 <i style={{ color: 'white' }} className="bi bi-plus"></i>
                 <span style={{ color: 'white' }}>Add</span>
@@ -62,20 +77,22 @@ const GetRolesDetail = () => {
                 <thead className="table-light">
                     <tr>
                         <th scope="col">S.NO</th>
-                        <th scope="col">Role</th>
+                        <th scope="col">ModuleName</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {output.map((data, index) => (
-                        <tr key={data.role_id}> 
-                            <th scope="row">{index + 1}</th>
-                            <td>{data.role_name}</td>
+                        <tr key={index}> 
+                            <th scope="row">{data.module_id}</th>
+                            <td>{data.module_name}</td>
+                            <td>{data.description}</td>
                             <td>
-                                <i className="bi bi-eye"></i>
-                                <i className="bi bi-pencil"></i>
-                                <i className="bi bi-trash" onClick={() => deleteRole(data.role_id)}></i>
-                            </td>
+                                <i className="bi bi-eye"  onClick={() => ViewModule(data.module_id)}> </i>
+                                <i className="bi bi-pencil" onClick={() => updateModule(data.module_id)}> </i>
+                                <i className="bi bi-trash" onClick={() => deleteModule(data.module_id)}></i>
+                                </td>
                         </tr>
                     ))}
                 </tbody>
@@ -114,43 +131,37 @@ const GetRolesDetail = () => {
                         type="button" 
                         className="btn"
                         onClick={() => setPage(1)}
-                    >
-                        1
+                    >1
                     </button>
                     <button 
                         type="button" 
                         className="btn"
                         onClick={() => setPage(2)}
-                    >
-                        2
+                    >2
                     </button>
                     <button 
                         type="button" 
                         className="btn"
                         onClick={() => setPage(3)}
-                    >
-                        3
+                    >3
                     </button>
                     <button 
                         type="button" 
                         className="btn"
                         onClick={() => setPage(10)}
-                    >
-                        10
+                    >10
                     </button>
                     <button 
                         type="button" 
                         className="btn"
                         onClick={() => setPage((prevPage) => prevPage + 1)}
-                    >
-                        <i className="bi bi-chevron-right"></i>
+                    ><i className="bi bi-chevron-right"></i>
                     </button>
                     <button 
                         type="button" 
                         className="btn"
                         onClick={() => setPage(10)}
-                    >
-                        <i className="bi bi-chevron-double-right"></i>
+                    ><i className="bi bi-chevron-double-right"></i>
                     </button>
                 </div>
             </div>
@@ -158,4 +169,4 @@ const GetRolesDetail = () => {
     );
 };
 
-export default GetRolesDetail;
+export default AllModules;

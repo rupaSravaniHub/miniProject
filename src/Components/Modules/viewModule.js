@@ -1,9 +1,9 @@
-import '../style/addModule.css';
+import '../../style/addModule.css';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Context } from "../App";
+import { Context } from "../../App";
 const GetModule = () => {
-    const [add] = useContext(Context); 
+    const {viewModuleID} = useContext(Context); 
     const [result,setResult] = useState({})
     const [configFields, setConfigFields] = useState([{ input: '', value: '' }]);
     useEffect(() => {
@@ -12,26 +12,22 @@ const GetModule = () => {
             try {
                 const response = await axios.get('http://localhost:8085/getModulebyId', {
                     params: {
-                        module_id: add,
+                        module_id: viewModuleID,
                     },
                 });
 
                 const data = response.data || {};
                 setResult(data);
-                console.log(data.module_name)
-                // if (data.config1) {
-                //     const parsedConfig = JSON.parse(data.config1);
-                //     setConfigFields(parsedConfig || []);
-                // }
-
+                console.log(data)
             } catch (error) {console.error('Error fetching data:', error);}
         };
 
-        if (add) {
+        if (viewModuleID) {
             fetchModuleData();
         }
-    }, [add]);
+    }, [viewModuleID]);
 
+    console.log("output format",result)
     return (
         <>
             <div className="addModBody" style={{ marginTop: '20px' }}>

@@ -1,15 +1,14 @@
 import { useContext, useState, useEffect } from "react";
-import { Context } from "../App";
-import '../style/allModules.css';
+import { Context } from "../../App";
+import '../../style/addModule.css';
 import axios from "axios";
-import UpdateModuleData from "./updateModule";
 
-const AllModules = () => {
-    const { modulesList, setmodulesList, addModule, setaddmodule,updatemoduleId,setUpdateModuleId } = useContext(Context);
+const GetRolesDetail = () => {
+    const { rolesList, setrolesList,addRole, setaddRole } = useContext(Context);
 
-    const addModuleHandle = () => {
-        setaddmodule(true);
-        setmodulesList(false);
+    const addRoleHandle = () => {
+        setaddRole(true);
+        setrolesList(false);
     };
 
     const [page, setPage] = useState(1);
@@ -20,7 +19,7 @@ const AllModules = () => {
     useEffect(() => {
         const fetchModules = async () => {
             try {
-                const response = await axios.get('http://localhost:8085/getAllModules', {
+                const response = await axios.get('http://localhost:8085/getRoles', {
                     params: {
                         page: page,
                         limit: limit
@@ -32,43 +31,47 @@ const AllModules = () => {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchModules(); 
     }, [page, limit]);  
 
+    const deleteRole =async (role_id) => 
+        {
+            try {
+                const response = await axios.delete('http://localhost:8085/delRoleById', {
+                    params: {
+                        role_id: role_id
+                    }
+                    
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
 
-    // const [add,setaddModuleId] =useContext(Context);
-    // const [viewModule,setviewModule] =useContext(Context);
-    const AddModule = (moduleId) => 
-        {
-            // setaddModuleId(moduleId);
-            // setviewModule(true);
-        }
-    // const [setUpdateForm] = useContext(Context); 
-    const updateModule = (moduleId) => 
-        {
-            setUpdateModuleId(moduleId);
-            // setUpdateForm(true);
-        }
-    const deleteModule =async (moduleId) => 
-    {
-        try {
-            const response = await axios.delete('http://localhost:8085/delById', {
-                params: {
-                    module_id: moduleId
+        const { setViewRoleId } = useContext(Context);
+        const { setviewrole } = useContext(Context);
+        const viewRole = (role_id) => 
+            {
+                setViewRoleId(role_id);
+                setviewrole(true);
+            }
+
+            const { setUpdateRoleId } = useContext(Context);
+            const { setUpdateviewrole } = useContext(Context);
+            const UpdateRole = (role_id) => 
+                {
+
+                    setUpdateRoleId(role_id);
+                    setUpdateviewrole(true);
+                    console.log("role_id passed and update view set to true");
                 }
-                
-            });
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
+
     return (
         <div className="allModulesDiv">
             <button 
                 style={{ backgroundColor: 'rgb(2, 105, 165)' }} 
                 className="btn mt-2 ms-auto"
-                onClick={addModuleHandle}
+                onClick={addRoleHandle}
             >
                 <i style={{ color: 'white' }} className="bi bi-plus"></i>
                 <span style={{ color: 'white' }}>Add</span>
@@ -78,22 +81,20 @@ const AllModules = () => {
                 <thead className="table-light">
                     <tr>
                         <th scope="col">S.NO</th>
-                        <th scope="col">ModuleName</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {output.map((data, index) => (
                         <tr key={index}> 
-                            <th scope="row">{data.module_id}</th>
-                            <td>{data.module_name}</td>
-                            <td>{data.description}</td>
+                            <th scope="row">{data.role_id}</th>
+                            <td>{data.role_name}</td>
                             <td>
-                                <i className="bi bi-eye"  onClick={() => AddModule(data.module_id)}> </i>
-                                <i className="bi bi-pencil" onClick={() => updateModule(data.module_id)}> </i>
-                                <i className="bi bi-trash" onClick={() => deleteModule(data.module_id)}></i>
-                                </td>
+                                <i className="bi bi-eye" onClick={() => viewRole(data.role_id)}> </i>
+                                <i className="bi bi-pencil" onClick={() => UpdateRole(data.role_id)}> </i>
+                                <i className="bi bi-trash" onClick={() => deleteRole(data.role_id)}></i>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -176,4 +177,4 @@ const AllModules = () => {
     );
 };
 
-export default AllModules;
+export default GetRolesDetail;

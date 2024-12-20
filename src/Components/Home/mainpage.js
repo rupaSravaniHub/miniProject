@@ -1,20 +1,25 @@
-import '../style/mainpage.css';
-import AddModule from './addModule';
-import AllModules from './allModules';
-import GetRolesDetail from './getRoles'
+import '../../style/mainpage.css';
+import AddModule from '../Modules/addModule';
+import AllModules from '../Modules/getModules';
+import GetRolesDetail from '../Roles/getRoles'
 import { useContext } from "react";
-import { Context } from "../App";
-import AddRole from './addRole';
-import GetModule from './getModule';
+import { Context } from "../../App";
+import AddRole from '../Roles/addRole';
+import GetModule from '../Modules/viewModule';
+import ViewRole from '../Roles/viewRole';
+import UpdateRole from '../Roles/updateRole';
 
 const Main = () => {
-    const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, setaddRole,viewModule,setviewModule} = useContext(Context);
+    const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, 
+        setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole} = useContext(Context);
 
     const getModules = () => {
         setmodulesList(true);
         setaddmodule(false);
         setaddRole(false);
         setrolesList(false);
+        setviewrole(false);
+        setUpdateviewrole(false);
     };
 
     const getRoles = () => {
@@ -22,7 +27,15 @@ const Main = () => {
         setaddmodule(false);
         setaddRole(false);
         setrolesList(true);
+        setviewrole(false);
+        setUpdateviewrole(false);
     };
+
+    if(viewrole || updateviewrole)
+    {
+        setrolesList(false);
+    }
+    
     return (
         <>
             <div className="container-fluid">
@@ -49,6 +62,8 @@ const Main = () => {
                         {rolesList && <GetRolesDetail/>}
                         {addRole && <AddRole/>}
                         {viewModule && <GetModule/>}
+                        {viewrole && <ViewRole/>}
+                        {updateviewrole && <UpdateRole/>}
                     </div>
                     </div>
               

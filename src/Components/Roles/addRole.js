@@ -1,4 +1,4 @@
-import '../style/addModule.css';
+import '../../style/addModule.css';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -45,11 +45,6 @@ const AddRole = () => {
                         </tr>
                     </tbody>
                 </table>
-
-                
-                
-                   
-                
             </div>
         </>
     );
