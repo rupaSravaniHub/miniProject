@@ -17,7 +17,7 @@
 #menuBar .menuItems span {
     font-size: 1rem; 
 }
-
+/* 
 @media (max-width: 992px) { 
     #menuBar .menuItems span {
         font-size: 0.8rem;
@@ -28,7 +28,7 @@
     #menuBar .menuItems span {
         font-size: 0.6rem;
     }
-}
+} */
 
 /* header styling */
 #headerBar {
@@ -46,7 +46,7 @@
     font-size: 1rem; 
 }
 
-@media (max-width: 992px) { 
+/* @media (max-width: 992px) { 
     #headerBar h3 {
         font-size: 1.5rem;
     }
@@ -66,7 +66,7 @@
         font-size: 0.8rem;
         text-align: center;
     }
-}
+} */
 
 
 #bodyDiv {

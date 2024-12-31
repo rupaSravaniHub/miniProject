@@ -44,11 +44,11 @@ const AllModules = () => {
             setaddModuleId(moduleId);
             setviewModule(true);
         }
-    // const [setUpdateForm] = useContext(Context); 
+    const {setUpdateModuleForm} = useContext(Context); 
     const updateModule = (moduleId) => 
         {
             setUpdateModuleId(moduleId);
-            // setUpdateForm(true);
+            setUpdateModuleForm(true);
         }
     const deleteModule =async (moduleId) => 
     {

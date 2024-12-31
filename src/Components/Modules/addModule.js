@@ -26,7 +26,7 @@ const AddModule = () => {
             const response = await axios.post('http://localhost:8085/addModule', {
                 module_name: moduleName,
                 description: moduleDes,
-                config1: configFieldsString ,
+                config1: configFieldsString,
                 created_at:currentDateTime
             });
             setData(response.data);

@@ -8,10 +8,11 @@ import AddRole from '../Roles/addRole';
 import GetModule from '../Modules/viewModule';
 import ViewRole from '../Roles/viewRole';
 import UpdateRole from '../Roles/updateRole';
+import UpdateModuleData from '../Modules/updateModule';
 
 const Main = () => {
     const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, 
-        setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole} = useContext(Context);
+        setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole, updateModuleForm,setUpdateModuleForm} = useContext(Context);
 
     const getModules = () => {
         setmodulesList(true);
@@ -20,6 +21,8 @@ const Main = () => {
         setrolesList(false);
         setviewrole(false);
         setUpdateviewrole(false);
+        setviewModule(false);
+        setUpdateModuleForm(false);
     };
 
     const getRoles = () => {
@@ -29,11 +32,17 @@ const Main = () => {
         setrolesList(true);
         setviewrole(false);
         setUpdateviewrole(false);
+        setUpdateModuleForm(false);
     };
 
     if(viewrole || updateviewrole)
     {
         setrolesList(false);
+    }
+
+    if(viewModule || updateModuleForm)
+    {
+        setmodulesList(false);
     }
     
     return (
@@ -41,7 +50,7 @@ const Main = () => {
             <div className="container-fluid">
                 <div className="row"> 
                    
-                    <div className=" col-md-3 col-lg-2 text-center" id="menuBar">
+                    <div className=" col-2 text-center" id="menuBar">
                         <div className="menuItems mt-5">
                             <span onClick={getModules}><i className="bi bi-app"></i> Module</span><br />
                             <span onClick={getRoles}><i className="bi bi-person"></i> Roles</span><br />
@@ -50,18 +59,19 @@ const Main = () => {
                     </div>
 
                   
-                    <div className=" col-md-9 col-lg-10" id="headerBar">
+                    <div className=" col-10" id="headerBar">
                         <h3 style={{ color: 'black' }}>Staff Management</h3>
                         <span className="fw-lighter">Administration/ <span className="fw-bold">Staff</span></span>
                     </div>
 
                     
-                    <div className=" col-md-9 col-lg-10" id="bodyDiv">
+                    <div className=" col-10" id="bodyDiv">
                         {modulesList && <AllModules />}
                         {addModule && <AddModule />}
                         {rolesList && <GetRolesDetail/>}
                         {addRole && <AddRole/>}
                         {viewModule && <GetModule/>}
+                        {updateModuleForm && <UpdateModuleData />}
                         {viewrole && <ViewRole/>}
                         {updateviewrole && <UpdateRole/>}
                     </div>

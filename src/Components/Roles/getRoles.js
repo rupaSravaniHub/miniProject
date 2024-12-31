@@ -42,7 +42,7 @@ const GetRolesDetail = () => {
                         role_id: role_id
                     }
                     
-                });
+                });   
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
