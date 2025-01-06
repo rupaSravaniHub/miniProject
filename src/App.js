@@ -10,6 +10,7 @@ function App() {
   const [addModule, setaddmodule] = useState(false);
   const [rolesList, setrolesList] = useState(false);
   const [addRole, setaddRole] = useState(false);
+  const [staffPage, setStaffPage] = useState(false);
   // to update Module
   const [updatemoduleId, setUpdateModuleId] = useState('');
   const [ updateModuleForm,setUpdateModuleForm]=useState(false);
@@ -40,7 +41,7 @@ function App() {
         { modulesList, setmodulesList, addModule, setaddmodule, rolesList, setrolesList,addRole, setaddRole,updatemoduleId,
           setUpdateModuleId,viewroleId,setViewRoleId,viewrole,setviewrole,updateRoleId,setUpdateRoleId,updateviewrole,
           setUpdateviewrole,getRoles,
-          viewModuleID,setaddModuleId,viewModule,setviewModule, updateModuleForm,setUpdateModuleForm
+          viewModuleID,setaddModuleId,viewModule,setviewModule, updateModuleForm,setUpdateModuleForm,setStaffPage,staffPage
         }}>
         <BrowserRouter>
           <Routes>

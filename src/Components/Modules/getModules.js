@@ -106,62 +106,28 @@ const AllModules = () => {
                         value={limit}
                         onChange={(e) => setLimit(e.target.value)}
                         min="1"
-                        max="10"
+                        max="10" 
                         style={{ marginLeft: "10px" }}
                     />
                     <span>Entries</span>
                 </div>
-                
                 <div className='paginationButtons ms-auto'>
                     <button 
                         type="button" 
                         className="btn"
-                        onClick={() => setPage(1)} 
-                    >
-                        <i className="bi bi-chevron-double-left"></i>
+                        onClick={() => setPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage))}
+                    ><i className="bi bi-chevron-left"></i>
                     </button>
                     <button 
                         type="button" 
                         className="btn"
-                        onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
-                    >
-                        <i className="bi bi-chevron-left"></i>
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(1)}
-                    >1
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(2)}
-                    >2
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(3)}
-                    >3
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(10)}
-                    >10
+                    >{page}
                     </button>
                     <button 
                         type="button" 
                         className="btn"
                         onClick={() => setPage((prevPage) => prevPage + 1)}
                     ><i className="bi bi-chevron-right"></i>
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(10)}
-                    ><i className="bi bi-chevron-double-right"></i>
                     </button>
                 </div>
             </div>

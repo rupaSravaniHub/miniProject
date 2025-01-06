@@ -9,10 +9,13 @@ import GetModule from '../Modules/viewModule';
 import ViewRole from '../Roles/viewRole';
 import UpdateRole from '../Roles/updateRole';
 import UpdateModuleData from '../Modules/updateModule';
+import { AddStaffMember } from '../Staff/addStaffMember';
 
 const Main = () => {
     const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, 
-        setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole, updateModuleForm,setUpdateModuleForm} = useContext(Context);
+        setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole, 
+        updateModuleForm,setUpdateModuleForm,staffPage,setStaffPage} 
+        = useContext(Context);
 
     const getModules = () => {
         setmodulesList(true);
@@ -23,6 +26,7 @@ const Main = () => {
         setUpdateviewrole(false);
         setviewModule(false);
         setUpdateModuleForm(false);
+        setStaffPage(false);
     };
 
     const getRoles = () => {
@@ -33,6 +37,17 @@ const Main = () => {
         setviewrole(false);
         setUpdateviewrole(false);
         setUpdateModuleForm(false);
+    };
+
+    const getStaffDetails = () => {
+        setmodulesList(false);
+        setaddmodule(false);
+        setaddRole(false);
+        setrolesList(true);
+        setviewrole(false);
+        setUpdateviewrole(false);
+        setUpdateModuleForm(false);
+        setrolesList(false);
     };
 
     if(viewrole || updateviewrole)
@@ -54,7 +69,7 @@ const Main = () => {
                         <div className="menuItems mt-5">
                             <span onClick={getModules}><i className="bi bi-app"></i> Module</span><br />
                             <span onClick={getRoles}><i className="bi bi-person"></i> Roles</span><br />
-                            <span><i className="bi bi-people"></i> Staff</span>
+                            <span onClick={getStaffDetails}><i className="bi bi-people"></i> Staff</span>
                         </div>
                     </div>
 
@@ -74,6 +89,7 @@ const Main = () => {
                         {updateModuleForm && <UpdateModuleData />}
                         {viewrole && <ViewRole/>}
                         {updateviewrole && <UpdateRole/>}
+                        {staffPage && <AddStaffMember></AddStaffMember>}
                     </div>
                     </div>
               
