@@ -4,7 +4,7 @@ import '../../style/addModule.css';
 import axios from "axios";
 
 const GetRolesDetail = () => {
-    const { rolesList, setrolesList,addRole, setaddRole } = useContext(Context);
+    const { rolesList, setrolesList, addRole, setaddRole } = useContext(Context);
 
     const addRoleHandle = () => {
         setaddRole(true);
@@ -12,10 +12,10 @@ const GetRolesDetail = () => {
     };
 
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10); 
+    const [limit, setLimit] = useState(10);
     const [output, setOutput] = useState([]);
 
-   
+
     useEffect(() => {
         const fetchModules = async () => {
             try {
@@ -25,51 +25,48 @@ const GetRolesDetail = () => {
                         limit: limit
                     }
                 });
-                console.log("output",output)
+                console.log("output", output)
                 setOutput(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-        fetchModules(); 
-    }, [page, limit]);  
+        fetchModules();
+    }, [page, limit]);
 
-    const deleteRole =async (role_id) => 
-        {
-            try {
-                const response = await axios.delete('http://localhost:8085/delRoleById', {
-                    params: {
-                        role_id: role_id
-                    }
-                    
-                });   
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        const { setViewRoleId } = useContext(Context);
-        const { setviewrole } = useContext(Context);
-        const viewRole = (role_id) => 
-            {
-                setViewRoleId(role_id);
-                setviewrole(true);
-            }
-
-            const { setUpdateRoleId } = useContext(Context);
-            const { setUpdateviewrole } = useContext(Context);
-            const UpdateRole = (role_id) => 
-                {
-
-                    setUpdateRoleId(role_id);
-                    setUpdateviewrole(true);
-                    console.log("role_id passed and update view set to true");
+    const deleteRole = async (role_id) => {
+        try {
+            const response = await axios.delete('http://localhost:8085/delRoleById', {
+                params: {
+                    role_id: role_id
                 }
+
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    const { setViewRoleId } = useContext(Context);
+    const { setviewrole } = useContext(Context);
+    const viewRole = (role_id) => {
+        setViewRoleId(role_id);
+        setviewrole(true);
+    }
+
+    const { setUpdateRoleId } = useContext(Context);
+    const { setUpdateviewrole } = useContext(Context);
+    const UpdateRole = (role_id) => {
+
+        setUpdateRoleId(role_id);
+        setUpdateviewrole(true);
+        console.log("role_id passed and update view set to true");
+    }
 
     return (
         <div className="allModulesDiv">
-            <button 
-                style={{ backgroundColor: 'rgb(2, 105, 165)' }} 
+            <button
+                style={{ backgroundColor: 'rgb(2, 105, 165)' }}
                 className="btn mt-2 ms-auto"
                 onClick={addRoleHandle}
             >
@@ -87,7 +84,7 @@ const GetRolesDetail = () => {
                 </thead>
                 <tbody>
                     {output.map((data, index) => (
-                        <tr key={index}> 
+                        <tr key={index}>
                             <th scope="row">{data.role_id}</th>
                             <td>{data.role_name}</td>
                             <td>
@@ -113,64 +110,28 @@ const GetRolesDetail = () => {
                     />
                     <span>Entries</span>
                 </div>
-                
+
                 <div className='paginationButtons ms-auto'>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(1)} 
-                    >
-                        <i className="bi bi-chevron-double-left"></i>
-                    </button>
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         className="btn"
                         onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
                     >
                         <i className="bi bi-chevron-left"></i>
                     </button>
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         className="btn"
-                        onClick={() => setPage(1)}
-                    >
-                        1
+                    >{page}
                     </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(2)}
-                    >
-                        2
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(3)}
-                    >
-                        3
-                    </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(10)}
-                    >
-                        10
-                    </button>
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         className="btn"
                         onClick={() => setPage((prevPage) => prevPage + 1)}
                     >
                         <i className="bi bi-chevron-right"></i>
                     </button>
-                    <button 
-                        type="button" 
-                        className="btn"
-                        onClick={() => setPage(10)}
-                    >
-                        <i className="bi bi-chevron-double-right"></i>
-                    </button>
+
                 </div>
             </div>
         </div>

@@ -9,12 +9,13 @@ import GetModule from '../Modules/viewModule';
 import ViewRole from '../Roles/viewRole';
 import UpdateRole from '../Roles/updateRole';
 import UpdateModuleData from '../Modules/updateModule';
-import { AddStaffMember } from '../Staff/addStaffMember';
+import { StaffDetails } from '../Staff/staffDetails';
+import { AddStaffMember } from '../Staff/addStaffMem';
 
 const Main = () => {
     const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, 
         setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole, 
-        updateModuleForm,setUpdateModuleForm,staffPage,setStaffPage} 
+        updateModuleForm,setUpdateModuleForm,staffPage,setStaffPage,setAddStaffMem,addStaffMem} 
         = useContext(Context);
 
     const getModules = () => {
@@ -37,6 +38,7 @@ const Main = () => {
         setviewrole(false);
         setUpdateviewrole(false);
         setUpdateModuleForm(false);
+        setStaffPage(false);
     };
 
     const getStaffDetails = () => {
@@ -48,6 +50,7 @@ const Main = () => {
         setUpdateviewrole(false);
         setUpdateModuleForm(false);
         setrolesList(false);
+        setStaffPage(true);
     };
 
     if(viewrole || updateviewrole)
@@ -89,7 +92,8 @@ const Main = () => {
                         {updateModuleForm && <UpdateModuleData />}
                         {viewrole && <ViewRole/>}
                         {updateviewrole && <UpdateRole/>}
-                        {staffPage && <AddStaffMember></AddStaffMember>}
+                        {staffPage && <StaffDetails></StaffDetails>}
+                        {addStaffMem && <AddStaffMember></AddStaffMember>}
                     </div>
                     </div>
               
