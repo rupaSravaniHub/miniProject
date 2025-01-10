@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 
@@ -20,7 +20,49 @@ export const AddStaffMember = () => {
         department: "",
         joinDate: "",
         salary: "",
+        modules: "",
+        permissions: "",
     });
+
+    const [moduleNames, setModuleNames] = useState([]);
+    const [permissions, setPermissions] = useState([]);
+    useEffect(() => {
+        const fetchModuleNames = async () => {
+            try {
+                const Modulesresponse = await axios.get('http://localhost:8085/getModules', {
+                });
+                setModuleNames(Modulesresponse.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+            try {
+                const response = await axios.get('http://localhost:8085/permissions', {
+                });
+                setPermissions(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchModuleNames();
+    }, []);
+
+    const [selectedModules, setSelectedModules] = useState([]);
+    const handleCheckboxChange = (moduleName) => {
+        if (selectedModules.includes(moduleName)) {
+          setSelectedModules(selectedModules.filter((name) => name !== moduleName));
+        } else {
+          setSelectedModules([...selectedModules, moduleName]);
+        }
+      };
+
+      const [selectedpermissions, setSelectedpermissions] = useState([]);
+    const handlePerCheckboxChange = (moduleName) => {
+        if (selectedModules.includes(moduleName)) {
+          setSelectedModules(selectedModules.filter((name) => name !== moduleName));
+        } else {
+          setSelectedModules([...selectedModules, moduleName]);
+        }
+      };
 
     const handleChange = (e) => {
         const { name, value } = e.target; //Object destructuring
@@ -37,24 +79,34 @@ export const AddStaffMember = () => {
         }
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Submitted:", formData);
-        try{
-            const saveStaffMemDetails = await axios.post('http://localhost:8085/saveData', formData);
+
+        const payload = {
+            ...formData,
+            address: JSON.stringify(formData.address),
+            permissions:JSON.stringify(),
+            modules:JSON.stringify(selectedModules),
+        };
+        console.log("Form Submitted:", payload);
+
+        try {
+            const saveStaffMemDetails = await axios.post(
+                'http://localhost:8085/addStaffMem',
+                payload
+            );
             console.log('Data saved successfully:', saveStaffMemDetails.data);
+        } catch (error) {
+            console.error('Error saving data:', error);
         }
-        catch (error) {
-            console.error('Error fetching data:', error);
-        }
-        
     };
+
 
     return (
         <div
             className="container mt-4"
             style={{
-                maxHeight: '500px', 
+                maxHeight: '500px',
                 overflowY: 'auto',
                 scrollbarWidth: 'thin'
             }}
@@ -262,6 +314,36 @@ export const AddStaffMember = () => {
                         onChange={handleChange}
                         required
                     />
+                </div>
+                <div   style={{display:'flex', justifyContent:'space-between'}}>
+                <div className="col-md-6" style={{display:'flex' ,flexDirection:'column'}}>
+                <h4>Select Modules</h4>
+                {moduleNames.map((moduleName, index) => (
+                    <div key={index}>
+                            <input
+                                type="checkbox"
+                                value={moduleName}
+                                checked={selectedModules.includes(moduleName)}
+                                onChange={() => handleCheckboxChange(moduleName)}
+                            />
+                            {moduleName}
+                    </div>
+                ))}
+                </div>
+                <div  className="col-md-6">
+                <h4>Permissions</h4>
+                {permissions.map((permission, index) => (
+                    <div key={index}>
+                            <input
+                                type="checkbox"
+                                value={permission}
+                                checked={selectedpermissions.includes(permission)}
+                                onChange={() => handlePerCheckboxChange(permission)}
+                            />
+                            {permission}
+                    </div>
+                ))}
+                </div>
                 </div>
                 <div className="col-12 text-center">
                     <button type="submit" className="btn btn-primary">

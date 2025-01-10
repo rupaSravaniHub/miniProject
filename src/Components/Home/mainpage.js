@@ -11,11 +11,14 @@ import UpdateRole from '../Roles/updateRole';
 import UpdateModuleData from '../Modules/updateModule';
 import { StaffDetails } from '../Staff/staffDetails';
 import { AddStaffMember } from '../Staff/addStaffMem';
+import { ViewstaffPageDetails } from '../Staff/ViewstaffPage';
+import { UpdateStaffDetails } from '../Staff/updateStaff';
 
 const Main = () => {
     const { modulesList, setmodulesList, addModule, setaddmodule,rolesList, setrolesList,addRole, 
         setaddRole,viewModule,setviewModule,viewrole,setviewrole,updateviewrole,setUpdateviewrole, 
-        updateModuleForm,setUpdateModuleForm,staffPage,setStaffPage,setAddStaffMem,addStaffMem} 
+        updateModuleForm,setUpdateModuleForm,staffPage,setStaffPage,setAddStaffMem,addStaffMem,
+        setUpdateAddStaffMem,updateStaffMem,setViewStaffPage,ViewstaffPage} 
         = useContext(Context);
 
     const getModules = () => {
@@ -28,6 +31,8 @@ const Main = () => {
         setviewModule(false);
         setUpdateModuleForm(false);
         setStaffPage(false);
+        setUpdateAddStaffMem(false);
+        setViewStaffPage(false);
     };
 
     const getRoles = () => {
@@ -39,6 +44,8 @@ const Main = () => {
         setUpdateviewrole(false);
         setUpdateModuleForm(false);
         setStaffPage(false);
+        setUpdateAddStaffMem(false);
+        setViewStaffPage(false);
     };
 
     const getStaffDetails = () => {
@@ -51,6 +58,9 @@ const Main = () => {
         setUpdateModuleForm(false);
         setrolesList(false);
         setStaffPage(true);
+        setAddStaffMem(false)
+        setUpdateAddStaffMem(false);
+        setViewStaffPage(false);
     };
 
     if(viewrole || updateviewrole)
@@ -63,6 +73,10 @@ const Main = () => {
         setmodulesList(false);
     }
     
+    if(updateStaffMem ||ViewstaffPage)
+    {
+        setStaffPage(false);
+    }
     return (
         <>
             <div className="container-fluid">
@@ -94,6 +108,8 @@ const Main = () => {
                         {updateviewrole && <UpdateRole/>}
                         {staffPage && <StaffDetails></StaffDetails>}
                         {addStaffMem && <AddStaffMember></AddStaffMember>}
+                        {updateStaffMem && <UpdateStaffDetails></UpdateStaffDetails>}
+                        {ViewstaffPage && <ViewstaffPageDetails></ViewstaffPageDetails>}
                     </div>
                     </div>
               

@@ -12,6 +12,10 @@ function App() {
   const [addRole, setaddRole] = useState(false);
   const [staffPage, setStaffPage] = useState(false);
   const [addStaffMem, setAddStaffMem] = useState(false);
+  const [ViewstaffPage, setViewStaffPage] = useState(false);
+  const [ViewstaffId, setViewstaffId] = useState('');
+  const [updateStaffMem, setUpdateAddStaffMem] = useState(false);
+  const [updateStaffId, setUpdateStaffId] = useState('');
   // to update Module
   const [updatemoduleId, setUpdateModuleId] = useState('');
   const [ updateModuleForm,setUpdateModuleForm]=useState(false);
@@ -41,8 +45,9 @@ function App() {
       <Context.Provider value={
         { modulesList, setmodulesList, addModule, setaddmodule, rolesList, setrolesList,addRole, setaddRole,updatemoduleId,
           setUpdateModuleId,viewroleId,setViewRoleId,viewrole,setviewrole,updateRoleId,setUpdateRoleId,updateviewrole,
-          setUpdateviewrole,getRoles,setAddStaffMem,addStaffMem,
-          viewModuleID,setaddModuleId,viewModule,setviewModule, updateModuleForm,setUpdateModuleForm,setStaffPage,staffPage
+          setUpdateviewrole,getRoles,setAddStaffMem,addStaffMem,setUpdateAddStaffMem,updateStaffMem,setViewStaffPage,ViewstaffPage,
+          viewModuleID,setaddModuleId,viewModule,setviewModule, updateModuleForm,setUpdateModuleForm,setStaffPage,
+          staffPage,setUpdateStaffId,updateStaffId,setViewstaffId,ViewstaffId
         }}>
         <BrowserRouter>
           <Routes>
