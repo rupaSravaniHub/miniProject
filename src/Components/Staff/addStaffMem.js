@@ -36,9 +36,10 @@ export const AddStaffMember = () => {
                 console.error('Error fetching data:', error);
             }
             try {
-                const response = await axios.get('http://localhost:8085/permissions', {
+                const response = await axios.get('http://localhost:8085/permissionNames', {
                 });
                 setPermissions(response.data);
+                console.log("permissions",response.data)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -56,14 +57,14 @@ export const AddStaffMember = () => {
       };
 
       const [selectedpermissions, setSelectedpermissions] = useState([]);
-    const handlePerCheckboxChange = (moduleName) => {
-        if (selectedModules.includes(moduleName)) {
-          setSelectedModules(selectedModules.filter((name) => name !== moduleName));
+      const handlePerCheckboxChange = (permission) => {
+        if (selectedpermissions.includes(permission)) {
+            setSelectedpermissions(selectedpermissions.filter((name) => name !== permission));
         } else {
-          setSelectedModules([...selectedModules, moduleName]);
+            setSelectedpermissions([...selectedpermissions, permission]);
         }
-      };
-
+    };
+    
     const handleChange = (e) => {
         const { name, value } = e.target; //Object destructuring
         if (["city", "state", "country", "pincode"].includes(name)) {
@@ -81,16 +82,20 @@ export const AddStaffMember = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(selectedpermissions)
+        console.log(selectedModules)
         const payload = {
             ...formData,
             address: JSON.stringify(formData.address),
-            permissions:JSON.stringify(),
+            permissions: JSON.stringify(selectedpermissions),
             modules:JSON.stringify(selectedModules),
         };
         console.log("Form Submitted:", payload);
 
         try {
+            console.log(payload)
+            console.log(selectedpermissions)
+        console.log(selectedModules)
             const saveStaffMemDetails = await axios.post(
                 'http://localhost:8085/addStaffMem',
                 payload
@@ -333,7 +338,8 @@ export const AddStaffMember = () => {
                 <div  className="col-md-6">
                 <h4>Permissions</h4>
                 {permissions.map((permission, index) => (
-                    <div key={index}>
+    <div key={index}>
+
                             <input
                                 type="checkbox"
                                 value={permission}

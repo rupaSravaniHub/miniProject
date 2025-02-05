@@ -73,7 +73,7 @@ const Main = () => {
         setmodulesList(false);
     }
     
-    if(updateStaffMem ||ViewstaffPage)
+    if(updateStaffMem ||ViewstaffPage ||addRole ||addModule)
     {
         setStaffPage(false);
     }
